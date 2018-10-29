@@ -16,11 +16,12 @@ class PDFExtractor(object):
     extracts and returns its content as a string.
     """
 
-    def __init__(self, path="", is_url=False):
-        """[summary]
+    def __init__(self, path=""):
+        """initializes the PDF Extractor object with an optional path
+        where to download the files to process when it comes from a URL
         
         Keyword Arguments:
-            path {str} -- [description] (default: {""})
+            path {str} -- A default path to save downloaded files to (default: {""})
         """
 
         self.initTime = datetime.datetime.now().timestamp()

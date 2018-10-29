@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="extractpdf",
-    version="0.0.1",
+    version="0.0.2",
 
     author="WeAreDevelopers",
     author_email="liad@wearedevelopers.com",
