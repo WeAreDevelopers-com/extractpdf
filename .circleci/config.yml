@@ -21,7 +21,6 @@ jobs:
           name: run tests
           command: |
             pipenv run pytest
-            codecov --token=$CODECOV_TOKEN
       - store_artifacts:
           path: htmlcov/
   deploy:

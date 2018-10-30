@@ -10,6 +10,7 @@ requests = "*"
 twine = "*"
 pytest = "*"
 codecov = "*"
+coverage = "*"
 
 [dev-packages]
 pylint = "*"
