@@ -11,6 +11,7 @@ twine = "*"
 pytest = "*"
 codecov = "*"
 coverage = "*"
+pytest-cov = "*"
 
 [dev-packages]
 pylint = "*"
