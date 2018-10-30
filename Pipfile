@@ -8,6 +8,7 @@ name = "pypi"
 "pdfminer.six" = "*"
 requests = "*"
 twine = "*"
+pytest = "*"
 
 [dev-packages]
 pylint = "*"
