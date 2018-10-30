@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\liadm\\.virtualenvs\\extractpdf-WDw110Qc\\Scripts\\python.exe"
+    "python.pythonPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+    "python.venvPath": "${workspaceFolder}/.venv/bin/python"
 }
