@@ -16,10 +16,21 @@ Then use it like so:
 ```python
 import extractpdf as epdf
 
-epdf.process('my_file.pdf')
-epdf.process('http://www.example.com/some_file.pdf')
+# local file
+content = epdf.process('my_file.pdf')
+# url:
+content = epdf.process('http://www.example.com/some_file.pdf')
 ```
 
+# Advanced Usage:
+To control more features, one can use the PDFExtractor itself:
+```python
+from extractpdf import PDFExtractor
+epdf = PDFExtractor()
+content = epdf.get_content('http://www.example.com/some_file.pdf', keep_download=True)
+f = epdf.filename # f = some_file.pdf
+epdf.delete_file()
+```
 
 # Development
 We welcome contributers warmly!

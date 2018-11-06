@@ -22,11 +22,10 @@ class Parser(ShellParser):
                 # If pdftotext isn't installed and the pdftotext method
                 # wasn't specified, then gracefully fallback to using
                 # pdfminer instead.
-                if method == '' and ex.is_not_installed():
+                if method == '':
                     return self.extract_pdfminer(filename, **kwargs)
                 else:
                     raise ex
-
         elif method == 'pdfminer':
             return self.extract_pdfminer(filename, **kwargs)
         elif method == 'tesseract':

@@ -66,15 +66,12 @@ workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build:
-          filters:
-            tags:
-              only: /.*/
+      - build
       - deploy:
           requires:
             - build
           filters:
-            tags:
-              only: /[0-9]+(\.[0-9]+)*/
+            # tags:
+            #   only: /[0-9]+(\.[0-9]+)*/
             branches:
-              ignore: /.*/
+              only: master
