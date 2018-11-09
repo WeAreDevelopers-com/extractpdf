@@ -58,8 +58,6 @@ class ShellError(CommandLineError):
             "The command `%(command)s` failed because the executable\n"
             "`%(executable)s` is not installed on your system. Please make\n"
             "sure the appropriate dependencies are installed before using\n"
-            "textract:\n\n"
-            "    http://textract.readthedocs.org/en/latest/installation.html\n"
         ) % vars(self)
 
     def failed_message(self):

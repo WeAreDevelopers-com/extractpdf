@@ -55,10 +55,19 @@ On MacOS - you can use homebrew:
 brew install pipenv
 ```
 
-Set the pipenv to be local in the project and then, install the packages and run the server
+Set the pipenv to be local in the project:
+On Windows:
 ```bash
 set PIPENV_VENV_IN_PROJECT=true 
+```
 
+On Mac/Linux:
+```bash
+export PIPENV_VENV_IN_PROJECT=true 
+```
+
+... and then, install the packages and run the server
+```
  # install all packages
 pipenv install
 ```

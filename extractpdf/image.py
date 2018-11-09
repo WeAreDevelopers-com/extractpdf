@@ -1,7 +1,7 @@
 """
 Process an image file using tesseract.
 """
-from .utils import ShellParser
+from .shell_parser import ShellParser
 
 
 class Parser(ShellParser):

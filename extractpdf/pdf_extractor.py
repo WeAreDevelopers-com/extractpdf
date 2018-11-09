@@ -48,6 +48,9 @@ class PDFExtractor(object):
         """If a url was given, download the file from the internet, 
         and save the filename internally
 
+        TODO: set the downloader to download a temporary file,
+        such as ShellParser.temp_filename()
+
         Arguments:
             url {string} -- A url for a file to download
         
