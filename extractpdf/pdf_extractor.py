@@ -64,12 +64,12 @@ class PDFExtractor(object):
 
         return dl.full_path
 
-    def parse_pdf(self):
+    def parse_pdf(self, method=''):
         if not (self.full_filename):
             raise AssertionError("PDF filename must not be empty")
 
         parser = Parser()
-        self.pdf_content = parser.process(self.full_filename, encoding="utf-8")
+        self.pdf_content = parser.process(self.full_filename, encoding="utf-8", method=method)
 
     def delete_file(self):
         if not (self.full_filename):
@@ -78,7 +78,7 @@ class PDFExtractor(object):
         if os.path.exists(self.full_filename):
             os.remove(self.full_filename)
 
-    def get_content(self, url="", keep_download = False):
+    def get_content(self, url="", method='', keep_download = False):
         if not isinstance(url, str):
             raise AssertionError("argument url must be a string")
 
@@ -90,7 +90,7 @@ class PDFExtractor(object):
         self.full_filename = self.download_file(url) if isurl else url
         self.filename = Downloader.parse_filename(self.full_filename)
 
-        self.parse_pdf()
+        self.parse_pdf(method)
 
         if isurl and not keep_download:
             self.delete_file()
