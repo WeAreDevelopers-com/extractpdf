@@ -46,8 +46,7 @@ class Downloader:
         if not isinstance(url, str):
             raise AssertionError("argument url must be a string")
 
-        if url.find("/") > 0:
-            filename = url.rsplit("/", 1)[1]
+        filename = url.rsplit("/", 1)[1] if url.find("/") > 0 else url
 
         # replaces dotts with dashes, except the last one
         # dotts = url.count(".") - 1

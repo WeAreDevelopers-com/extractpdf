@@ -5,7 +5,7 @@ from tempfile import mkdtemp
 
 from .exceptions import UnknownMethod, ShellError
 
-from .utils import ShellParser
+from .shell_parser import ShellParser
 from .image import Parser as TesseractParser
 
 
@@ -22,11 +22,10 @@ class Parser(ShellParser):
                 # If pdftotext isn't installed and the pdftotext method
                 # wasn't specified, then gracefully fallback to using
                 # pdfminer instead.
-                if method == '' and ex.is_not_installed():
+                if method == '':
                     return self.extract_pdfminer(filename, **kwargs)
                 else:
                     raise ex
-
         elif method == 'pdfminer':
             return self.extract_pdfminer(filename, **kwargs)
         elif method == 'tesseract':
@@ -37,15 +36,18 @@ class Parser(ShellParser):
     def extract_pdftotext(self, filename, **kwargs):
         """Extract text from pdfs using the pdftotext command line utility."""
         if 'layout' in kwargs:
-            args = ['pipenv','run', 'pdftotext', '-layout', filename, '-']
+            args = ['pdftotext', '-layout', filename, '-']
         else:
-            args = ['pipenv','run', 'pdftotext', filename, '-']
+            args = ['pdftotext', filename, '-']
         stdout, _ = self.run(args)
         return stdout
 
     def extract_pdfminer(self, filename, **kwargs):
         """Extract text from pdfs using pdfminer."""
-        stdout, _ = self.run(['pdf2txt.py', filename])
+
+        pdf2txt_path = self.find('pdf2txt.py', '/')
+
+        stdout, _ = self.run(['python', pdf2txt_path, filename])
         return stdout
 
     def extract_tesseract(self, filename, **kwargs):
@@ -63,3 +65,19 @@ class Parser(ShellParser):
             return six.b('').join(contents)
         finally:
             shutil.rmtree(temp_dir)
+    
+    @classmethod
+    def find(cls, name, path):
+        """Finds a file by its name in the system
+        
+        Arguments:
+            name {str} -- file name to search
+            path {str} -- a starting path to search from
+        
+        Returns:
+            str -- the path location of the file
+        """
+
+        for root, dirs, files in os.walk(path):
+            if name in files:
+                return os.path.join(root, name)

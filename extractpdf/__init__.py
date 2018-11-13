@@ -1,7 +1,7 @@
 from .pdf_extractor import PDFExtractor
 
 name = "extractpdf"
-VERSION = "0.0.2"
+VERSION = "0.0.4"
 
 def process(pdf_path):
     """This is the main function of extractpdf.

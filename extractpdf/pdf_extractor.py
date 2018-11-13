@@ -48,6 +48,9 @@ class PDFExtractor(object):
         """If a url was given, download the file from the internet, 
         and save the filename internally
 
+        TODO: set the downloader to download a temporary file,
+        such as ShellParser.temp_filename()
+
         Arguments:
             url {string} -- A url for a file to download
         
@@ -61,21 +64,21 @@ class PDFExtractor(object):
 
         return dl.full_path
 
-    def parse_pdf(self):
-        if not (self.filename):
+    def parse_pdf(self, method=''):
+        if not (self.full_filename):
             raise AssertionError("PDF filename must not be empty")
 
         parser = Parser()
-        self.pdf_content = parser.process(self.filename, encoding="utf-8")
+        self.pdf_content = parser.process(self.full_filename, encoding="utf-8", method=method)
 
     def delete_file(self):
-        if not (self.filename):
+        if not (self.full_filename):
             raise AssertionError("PDF filename must not be empty")
 
-        if os.path.exists(self.filename):
-            os.remove(self.filename)
+        if os.path.exists(self.full_filename):
+            os.remove(self.full_filename)
 
-    def get_content(self, url=""):
+    def get_content(self, url="", method='', keep_download = False):
         if not isinstance(url, str):
             raise AssertionError("argument url must be a string")
 
@@ -84,11 +87,13 @@ class PDFExtractor(object):
 
         isurl = self.is_url(url)
 
-        self.filename = self.download_file(url) if isurl else url
+        self.full_filename = self.download_file(url) if isurl else url
+        self.filename = Downloader.parse_filename(self.full_filename)
 
-        self.parse_pdf()
+        self.parse_pdf(method)
 
-        self.delete_file()
+        if isurl and not keep_download:
+            self.delete_file()
 
         return self.pdf_content
 
